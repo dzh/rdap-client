@@ -1,0 +1,88 @@
+package rdap.client;
+
+import rdap.client.internal.*;
+
+import java.net.ProxySelector;
+import java.util.Properties;
+
+/**
+ * @author dzh
+ * @date 2019-03-26 20:35
+ */
+public class RdapProvider {
+
+    private String source;
+    private String cc;
+    private ProxySelector selector;
+    private Properties properties;
+    private ErrorHandler handler;
+
+    private RdapProvider() {
+    }
+
+    public static final RdapProvider create(String source) {
+        RdapProvider p = new RdapProvider();
+        p.source = source;
+        return p;
+    }
+
+    public RdapProvider source(String souce) {
+        this.source = source;
+        return this;
+    }
+
+    public RdapProvider cc(String cc) {
+        this.cc = cc;
+        return this;
+    }
+
+    public RdapProvider selector(ProxySelector selector) {
+        this.selector = selector;
+        return this;
+    }
+
+    public RdapProvider properties(Properties properties) {
+        this.properties = properties;
+        return this;
+    }
+
+    public RdapProvider handler(ErrorHandler handler) {
+        this.handler = handler;
+        return this;
+    }
+
+    public RdapClient build() {
+        if (null == source) return null;
+
+        ProxyRdapClient rdap = null;
+        switch (source) {
+            case RdapConst.SOURCE_AFRINIC:
+                rdap = new AfrinicClient();
+                break;
+            case RdapConst.SOURCE_APNIC:
+                rdap = new ApnicClient();
+                break;
+            case RdapConst.SOURCE_ARIN:
+                rdap = new ArinClient();
+                break;
+            case RdapConst.SOURCE_LACNIC: {
+                if ("br".equalsIgnoreCase(cc)) {
+                    rdap = new RegistroClient();
+                } else {
+                    rdap = new LacnicClient();
+                }
+                break;
+            }
+            case RdapConst.SOURCE_RIPE:
+                rdap = new RipeClient();
+                break;
+            default:
+                //rdap = new IanaClient();
+                throw new IllegalArgumentException("invalid source " + source);
+        }
+
+        rdap.init(selector, properties, handler);
+
+        return rdap;
+    }
+}
