@@ -3,6 +3,7 @@ package rdap.client;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import rdap.client.data.Autnum;
 import rdap.client.data.Network;
 
 import java.io.IOException;
@@ -29,8 +30,8 @@ public class TestRdapClient {
         Network network = client.ip(ip, 24);
         LOG.info("{} {}", ip, network);
 
-        ip = "27.0.0.0";
-        network = client.ip(ip, 8);
+        ip = "103.100.201.0";
+        network = client.ip(ip, 24);
         LOG.info("{} {}", ip, network);
 
         // properties.setProperty(RdapConst.P_HTTP_SSL, "false");
@@ -38,6 +39,15 @@ public class TestRdapClient {
 //        ip = "5.0.0.1";
 //        network = client.ip(ip, null);
 //        LOG.info("{} {}", ip, network);
+    }
+
+    @Test
+    public void autnumTest() throws IOException {
+        RdapClient client = RdapProvider.create(RdapConst.SOURCE_APNIC).build();
+
+        long asn = 2925;
+        Autnum autnum = client.autnum(asn);
+        LOG.info("{} {}", autnum.getHandle(), autnum.getCountry());
     }
 
     @Test

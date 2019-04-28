@@ -94,8 +94,8 @@ public interface RdapClient {
     //Entityies entities(String query);
 
     /**
-     * @param error response error
      * @param url   request url
+     * @param error response error
      */
-    void error(Error error, URL url);
+    void error(URL url, Error error);
 }

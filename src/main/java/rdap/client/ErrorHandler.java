@@ -10,6 +10,6 @@ import java.net.URL;
  */
 public interface ErrorHandler {
 
-    void handle(Error error, URL url);
+    void handle(URL url, Error error);
 
 }
