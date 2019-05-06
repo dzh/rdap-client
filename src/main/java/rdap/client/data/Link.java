@@ -1,5 +1,7 @@
 package rdap.client.data;
 
+import java.util.List;
+
 /**
  * The "href" JSON value MUST be specified.  All other JSON values are OPTIONAL.
  * <p>
@@ -23,7 +25,7 @@ public class Link {
     private String value;
     private String rel;
     private String href;  //must
-    private String hreflang;
+    private List<String> hreflang; // [ "en" ]
     private String title;
     private String media;
     private String type;
@@ -52,11 +54,11 @@ public class Link {
         this.href = href;
     }
 
-    public String getHreflang() {
+    public List<String> getHreflang() {
         return hreflang;
     }
 
-    public void setHreflang(String hreflang) {
+    public void setHreflang(List<String> hreflang) {
         this.hreflang = hreflang;
     }
 

@@ -49,8 +49,7 @@ public abstract class ProxyRdapClient implements RdapClient {
         return properties.getProperty(key);
     }
 
-    protected RdapRes request(URL url) throws IOException {
-        long st = System.currentTimeMillis();
+    private HttpURLConnection newConnection(URL url) throws IOException {
         Proxy proxy = null;
         try {
             proxy = selectProxy(url);
@@ -64,7 +63,21 @@ public abstract class ProxyRdapClient implements RdapClient {
         conn.setInstanceFollowRedirects(true);
         conn.connect();
 
+        return conn;
+    }
+
+    protected RdapRes request(URL url) throws IOException {
+        long st = System.currentTimeMillis();
+
+        HttpURLConnection conn = newConnection(url);
         int resCode = conn.getResponseCode();
+
+        if (resCode / 100 == 3) { //redirect
+            String newUrl = conn.getHeaderField("Location");
+            conn = newConnection(new URL(newUrl));
+            resCode = conn.getResponseCode();
+        }
+
         try (InputStream in = (resCode / 100 == 2) ? conn.getInputStream() : conn.getErrorStream()) {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             byte[] buf = new byte[1024]; //TODO config

@@ -17,4 +17,9 @@ public class AfrinicClient extends ProxyRdapClient {
         boolean ssl = Boolean.parseBoolean(property(RdapConst.P_HTTP_SSL, "true"));
         return new URL(ssl ? "https" : "http", RdapConst.RDAP_AFRINIC_HOST, "");
     }
+
+    @Override
+    protected String pathPrefix() {
+        return "rdap/";
+    }
 }

@@ -23,20 +23,46 @@ public class TestRdapClient {
 
     @Test
     public void ipTest() throws IOException {
-        RdapClient client = RdapProvider.create(RdapConst.SOURCE_APNIC).build();
         Properties properties = new Properties();
+        properties.setProperty(RdapConst.P_HTTP_SSL, "false");
+        // apnic
+        RdapClient client = RdapProvider.create(RdapConst.SOURCE_APNIC).build();
 
         String ip = "1.2.4.0";
         Network network = client.ip(ip, 24);
         LOG.info("{} {}", ip, network);
 
-        ip = "103.100.201.0";
-        network = client.ip(ip, 24);
-        LOG.info("{} {}", ip, network);
+//        ip = "103.100.201.0";
+//        network = client.ip(ip, 24);
+//        LOG.info("{} {}", ip, network);
 
         // properties.setProperty(RdapConst.P_HTTP_SSL, "false");
 //        client = RdapProvider.create(RdapConst.SOURCE_RIPE).selector(selector).properties(properties).build();
 //        ip = "5.0.0.1";
+//        network = client.ip(ip, null);
+//        LOG.info("{} {}", ip, network);
+
+        // ripe
+//        client = RdapProvider.create(RdapConst.SOURCE_RIPE).selector(selector).properties(properties).build();
+//        ip = "194.206.161.47";
+//        network = client.ip(ip, null);
+//        LOG.info("{} {}", ip, network);
+
+        // afrinic
+//        client = RdapProvider.create(RdapConst.SOURCE_AFRINIC).selector(selector).properties(properties).build();
+//        ip = "196.192.116.0";
+//        network = client.ip(ip, null);
+//        LOG.info("{} {}", ip, network);
+
+        // arin
+//        client = RdapProvider.create(RdapConst.SOURCE_ARIN).selector(selector).properties(properties).build();
+//        ip = "216.254.222.0";
+//        network = client.ip(ip, null);
+//        LOG.info("{} {}", ip, network);
+
+        //lacnic
+//        client = RdapProvider.create(RdapConst.SOURCE_LACNIC).selector(selector).properties(properties).build();
+//        ip = "207.249.128.0";
 //        network = client.ip(ip, null);
 //        LOG.info("{} {}", ip, network);
     }
@@ -60,7 +86,7 @@ public class TestRdapClient {
 
     static class TestProxySelector extends ProxySelector {
 
-        Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("60.54.78.45", 8080));
+        Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("110.168.85.155", 8080));
 
         @Override
         public List<Proxy> select(URI uri) {

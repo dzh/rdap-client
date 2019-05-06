@@ -5,9 +5,16 @@ A Java client library for RDAP (Registration Data Access Protocol)
 
 ## Quick Start
 
-### Add maven dependence
+### Add maven dependency
+```xml
+<dependency>
+    <groupId>io.github.dzh</groupId>
+    <artifactId>rdap-client</artifactId>
+    <version>2019.3.16-SNAPSHOT</version>
+</dependency>
+```
 
-### Simple Example
+### Simple example
 ```java
 
 RdapClient client = RdapProvider.create(RdapConst.SOURCE_APNIC).build();
