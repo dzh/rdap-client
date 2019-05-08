@@ -138,7 +138,7 @@ public class EntityUtil {
                 });
 
                 String[] remarks = compactRemarks(en.getRemarks());
-                if (remarks.length > 0) {
+                if (remarks != null && remarks.length > 0) {
                     role.setRemarks(remarks[0]);
                 }
                 //admin_c tech_c
