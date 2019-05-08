@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import rdap.client.ProxyRdapClient;
 import rdap.client.data.Entity;
 import rdap.client.data.Event;
+import rdap.client.data.Remark;
 import rdap.client.whois.Role;
 
 import java.io.IOException;
@@ -116,7 +117,7 @@ public class EntityUtil {
                 Role role = new Role();
                 role.setNicHdl(en.getHandle());
                 role.setLastModified(EntityUtil.getLastChanged(en));
-                role.setRole(vcard.getFormattedName().getValue());
+                role.setRole(vcard.getFormattedName().getValue());//fn
 
                 List<Address> addresses = vcard.getAddresses();
                 if (addresses != null && addresses.size() > 0)
@@ -136,6 +137,22 @@ public class EntityUtil {
                     }
                 });
 
+                String[] remarks = compactRemarks(en.getRemarks());
+                if (remarks.length > 0) {
+                    role.setRemarks(remarks[0]);
+                }
+                //admin_c tech_c
+                List<Entity> entities = en.getEntities();
+                if (entities != null) {
+                    for (Entity e : entities) {
+                        if (isAdmin(e)) {
+                            role.setAdminC(e.getHandle());
+                        }
+                        if (isTech(e)) {
+                            role.setTechC(e.getHandle());
+                        }
+                    }
+                }
                 roles.add(role);
             }
         }
@@ -144,6 +161,31 @@ public class EntityUtil {
             LOG.error("too many roles {} {}", roles.size(), ProxyRdapClient.GSON.toJson(roles));
         }
         return roles.get(0); // An Entity to A Role
+    }
+
+
+    /**
+     * @param remarkList
+     * @return [remarks, descr]
+     */
+    public static String[] compactRemarks(List<Remark> remarkList) {
+        if (remarkList == null) return null;
+
+        String remarks = "";
+        String descr = "";
+        for (Remark r : remarkList) {
+            String title = r.getTitle();
+            switch (title) {
+                case "remarks":
+                    remarks += "\n" + String.join("\n", r.getDescription());
+                    break;
+                case "description":
+                    descr += "\n" + String.join("\n", r.getDescription());
+                    break;
+            }
+        }
+
+        return new String[]{remarks, descr};
     }
 
 }

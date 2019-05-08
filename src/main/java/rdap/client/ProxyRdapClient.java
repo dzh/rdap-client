@@ -76,6 +76,7 @@ public abstract class ProxyRdapClient implements RdapClient {
             String newUrl = conn.getHeaderField("Location");
             conn = newConnection(new URL(newUrl));
             resCode = conn.getResponseCode();
+            LOG.info("redirect {} {}", url, newUrl);
         }
 
         try (InputStream in = (resCode / 100 == 2) ? conn.getInputStream() : conn.getErrorStream()) {

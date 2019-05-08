@@ -28,8 +28,8 @@ public class TestRdapClient {
         // apnic
         RdapClient client = RdapProvider.create(RdapConst.SOURCE_APNIC).build();
 
-        String ip = "1.2.4.0";
-        Network network = client.ip(ip, 24);
+        String ip = "203.113.0.0";
+        Network network = client.ip(ip, 19);
         LOG.info("{} {}", ip, network);
 
 //        ip = "103.100.201.0";
@@ -63,6 +63,12 @@ public class TestRdapClient {
         //lacnic
 //        client = RdapProvider.create(RdapConst.SOURCE_LACNIC).selector(selector).properties(properties).build();
 //        ip = "207.249.128.0";
+//        network = client.ip(ip, null);
+//        LOG.info("{} {}", ip, network);
+
+        //lacnic br
+//        client = RdapProvider.create(RdapConst.SOURCE_LACNIC).cc("BR").selector(selector).properties(properties).build();
+//        ip = "45.4.228.0";
 //        network = client.ip(ip, null);
 //        LOG.info("{} {}", ip, network);
     }
