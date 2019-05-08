@@ -90,7 +90,7 @@ public abstract class ProxyRdapClient implements RdapClient {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("{} {}", url, res.getRes());
             }
-            if (res.isFail()) {
+            if (res.isError()) {
                 error(url, GSON.fromJson(res.getRes(), Error.class));
             }
             return res;
@@ -254,6 +254,10 @@ public abstract class ProxyRdapClient implements RdapClient {
 
         public boolean isFail() {
             return status >= 300 || status < 200;
+        }
+
+        public boolean isError() {
+            return status / 100 == 4;
         }
     }
 
