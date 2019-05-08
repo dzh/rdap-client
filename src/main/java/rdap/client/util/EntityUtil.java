@@ -78,6 +78,7 @@ public class EntityUtil {
 //        }
         String date = getLastChanged(e);
         if (date != null) {
+            date = formatUTC(date);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
             sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
             return sdf.parse(date);
@@ -85,6 +86,10 @@ public class EntityUtil {
         return null;
     }
 
+    /**
+     * @param e
+     * @return 2017-01-28T08:32:29-05:00 or 2017-01-28T08:32:29Z
+     */
     public static String getLastChanged(Entity e) {
         List<Event> events = e.getEvents();
         if (events != null) {
@@ -95,6 +100,15 @@ public class EntityUtil {
             }
         }
         return null;
+    }
+
+    public static String formatUTC(String date) {
+        if (date == null) return null;
+
+        if (date.length() > 20) {
+            return date.substring(0, 19) + 'Z';
+        }
+        return date;
     }
 
     /**

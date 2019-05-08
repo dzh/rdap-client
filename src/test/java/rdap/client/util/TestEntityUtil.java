@@ -57,6 +57,11 @@ public class TestEntityUtil {
 
         sdf.setTimeZone(TimeZone.getDefault());
         LOG.info("utc+8 {}", sdf.format(date));
+
+        String st = "2017-01-28T08:32:29-05:00";
+        LOG.info("{}", EntityUtil.formatUTC(st));
+        st = "2017-01-28T08:32:29Z";
+        LOG.info("{}", EntityUtil.formatUTC(st));
     }
 
 }
