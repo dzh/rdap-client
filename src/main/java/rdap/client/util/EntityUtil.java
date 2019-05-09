@@ -145,6 +145,7 @@ public class EntityUtil {
                 role.setNicHdl(en.getHandle());
                 role.setLastModified(EntityUtil.getLastChanged(en));
                 role.setRole(vcard.getFormattedName().getValue());//fn
+//                role.setAbuseMailbox(); todo
 
                 List<Address> addresses = vcard.getAddresses();
                 if (addresses != null && addresses.size() > 0)
@@ -182,6 +183,9 @@ public class EntityUtil {
                             role.setMntBy(e.getHandle());
                         }
                         if (isAbuse(e)) {
+                            if (role.getMntBy() == null) { //todo
+                                role.setMntBy(e.getHandle());
+                            }
                         }
                     }
                 }
