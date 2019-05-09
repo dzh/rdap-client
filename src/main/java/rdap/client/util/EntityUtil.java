@@ -29,6 +29,19 @@ public class EntityUtil {
 
     static final Logger LOG = LoggerFactory.getLogger(EntityUtil.class);
 
+    public static boolean isRegistrant(Entity e) {
+        List<String> roles = e.getRoles();
+        if (roles == null) return false;
+
+        for (String role : roles) {
+            if ("registrant".equalsIgnoreCase(role)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
     public static boolean isAdmin(Entity e) {
         List<String> roles = e.getRoles();
         if (roles == null) return false;
@@ -157,13 +170,18 @@ public class EntityUtil {
                 }
                 //admin_c tech_c
                 List<Entity> entities = en.getEntities();
-                if (entities != null) {
+                if (entities != null) { //todo https://rdap.apnic.net/ip/203.113.0.0
                     for (Entity e : entities) {
                         if (isAdmin(e)) {
                             role.setAdminC(e.getHandle());
                         }
                         if (isTech(e)) {
                             role.setTechC(e.getHandle());
+                        }
+                        if (isRegistrant(e)) {
+                            role.setMntBy(e.getHandle());
+                        }
+                        if (isAbuse(e)) {
                         }
                     }
                 }
@@ -175,6 +193,15 @@ public class EntityUtil {
             LOG.error("too many roles {} {}", roles.size(), ProxyRdapClient.GSON.toJson(roles));
         }
         return roles.get(0); // An Entity to A Role
+    }
+
+    public static String readEmailDomain(String email) {
+        if (email == null) return null;
+
+        int loc = email.indexOf("@");
+        if (loc < 0) return null;
+
+        return email.substring(loc + 1);
     }
 
 

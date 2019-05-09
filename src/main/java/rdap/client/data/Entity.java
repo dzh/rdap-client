@@ -47,12 +47,102 @@ import java.util.List;
  *    o  autnums -- an array of autnum objects as defined in Section 5.5
  * </pre>
  *
+ * <pre>
+ * Roles:
+ *       Value: registrant
+ *       Type: role
+ *       Description: The entity object instance is the registrant of the
+ *          registration.  In some registries, this is known as a
+ *          maintainer.
+ *       Registrant Name: IESG
+ *       Registrant Contact Information: iesg@ietf.org
+ *
+ *
+ *       Value: technical
+ *       Type: role
+ *       Description: The entity object instance is a technical contact for
+ *          the registration.
+ *       Registrant Name: IESG
+ *       Registrant Contact Information: iesg@ietf.org
+ *
+ *
+ *       Value: administrative
+ *       Type: role
+ *       Description: The entity object instance is an administrative
+ *          contact for the registration.
+ *       Registrant Name: IESG
+ *       Registrant Contact Information: iesg@ietf.org
+ *
+ *
+ *       Value: abuse
+ *       Type: role
+ *       Description: The entity object instance handles network abuse
+ *          issues on behalf of the registrant of the registration.
+ *       Registrant Name: IESG
+ *       Registrant Contact Information: iesg@ietf.org
+ *
+ *             Value: billing
+ *       Type: role
+ *       Description: The entity object instance handles payment and
+ *          billing issues on behalf of the registrant of the registration.
+ *       Registrant Name: IESG
+ *       Registrant Contact Information: iesg@ietf.org
+ *
+ *
+ *       Value: registrar
+ *       Type: role
+ *       Description: The entity object instance represents the authority
+ *          responsible for the registration in the registry.
+ *       Registrant Name: IESG
+ *       Registrant Contact Information: iesg@ietf.org
+ *
+ *
+ *       Value: reseller
+ *       Type: role
+ *       Description: The entity object instance represents a third party
+ *          through which the registration was conducted (i.e., not the
+ *          registry or registrar).
+ *       Registrant Name: IESG
+ *       Registrant Contact Information: iesg@ietf.org
+ *
+ *
+ *       Value: sponsor
+ *       Type: role
+ *       Description: The entity object instance represents a domain policy
+ *          sponsor, such as an ICANN-approved sponsor.
+ *       Registrant Name: IESG
+ *       Registrant Contact Information: iesg@ietf.org
+ *
+ *       Value: proxy
+ *       Type: role
+ *       Description: The entity object instance represents a proxy for
+ *          another entity object, such as a registrant.
+ *       Registrant Name: IESG
+ *       Registrant Contact Information: iesg@ietf.org
+ *
+ *
+ *       Value: notifications
+ *       Type: role
+ *       Description: An entity object instance designated to receive
+ *          notifications about association object instances.
+ *       Registrant Name: IESG
+ *       Registrant Contact Information: iesg@ietf.org
+ *
+ *       Value: noc
+ *       Type: role
+ *       Description: The entity object instance handles communications
+ *          related to a network operations center (NOC).
+ *       Registrant Name: IESG
+ *       Registrant Contact Information: iesg@ietf.org
+ *
+ * </pre>
+ *
  * @author dzh
  * @date 2019-03-27 18:00
  */
 public class Entity extends CommonData {
 
-    private List<String> roles;
+    private List<String> roles; // abuse technical administrative noc registrant
 
     private List<Entity> entities;
 

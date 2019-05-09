@@ -4,7 +4,10 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rdap.client.data.Autnum;
+import rdap.client.data.Entity;
 import rdap.client.data.Network;
+import rdap.client.util.EntityUtil;
+import rdap.client.whois.Role;
 
 import java.io.IOException;
 import java.net.*;
@@ -31,6 +34,23 @@ public class TestRdapClient {
         String ip = "203.113.0.0";
         Network network = client.ip(ip, 19);
         LOG.info("{} {}", ip, network);
+
+        List<Entity> entities = network.getEntities();
+        for (Entity en : entities) {
+            Role r = EntityUtil.getRole(en);
+            if (r != null)
+                LOG.info("role {} {}", r.geteMail(), EntityUtil.readEmailDomain(r.geteMail()));
+
+            if (EntityUtil.isAdmin(en)) {
+                LOG.info("admin-c {}", en.getHandle());
+            }
+            if (EntityUtil.isRegistrant(en)) {
+                LOG.info("mnt_by Registrant {}", en.getHandle());
+            }
+            if (EntityUtil.isAbuse(en)) {
+                LOG.info("mnt_by Abuse{}", en.getHandle());
+            }
+        }
 
 //        ip = "103.100.201.0";
 //        network = client.ip(ip, 24);
