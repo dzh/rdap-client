@@ -18,6 +18,7 @@ import java.util.TimeZone;
  * @date 2019-04-25 20:06
  */
 public class TestEntityUtil {
+
     static Logger LOG = LoggerFactory.getLogger(TestEntityUtil.class);
 
     @Test

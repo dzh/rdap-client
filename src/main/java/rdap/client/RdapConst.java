@@ -39,7 +39,7 @@ public interface RdapConst extends RdapValue {
     String RDAP_ARIN_HOST = "rdap.arin.net";
     String RDAP_LACNIC_HOST = "rdap.lacnic.net";
     String RDAP_AFRINIC_HOST = "rdap.afrinic.net";
-    String RDAP_REGISTRO_HOST = "rdap.registro.br";
+    String RDAP_REGISTRO_BR_HOST = "rdap.registro.br";
 
     String WHOIS_APNIC_HOST = "whois.apnic.net";
     String WHOIS_RIPE_HOST = "whois.ripe.net";

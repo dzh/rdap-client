@@ -48,6 +48,9 @@ import java.util.List;
  *
  *
  * </pre>
+ * <p>
+ * todo "originAutnum":"N/A", https://rdap.lacnic.net/rdap/ip/24.232.45.2
+ * fixme 404 https://rdap.lacnic.net/rdap/ip/24.232.45.2/31  24.232.53.4/30
  *
  * @author dzh
  * @date 2019-03-28 14:01

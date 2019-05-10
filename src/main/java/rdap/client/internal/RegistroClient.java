@@ -21,6 +21,6 @@ public class RegistroClient extends ProxyRdapClient {
     @Override
     protected URL host() throws MalformedURLException {
         boolean ssl = Boolean.parseBoolean(property(RdapConst.P_HTTP_SSL, "true"));
-        return new URL(ssl ? "https" : "http", RdapConst.RDAP_REGISTRO_HOST, "");
+        return new URL(ssl ? "https" : "http", RdapConst.RDAP_REGISTRO_BR_HOST, "");
     }
 }
