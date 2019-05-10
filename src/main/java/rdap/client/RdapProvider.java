@@ -55,7 +55,7 @@ public class RdapProvider {
         if (null == source) return null;
 
         ProxyRdapClient rdap = null;
-        switch (source) {
+        switch (source.toUpperCase()) {
             case RdapConst.SOURCE_AFRINIC:
                 rdap = new AfrinicClient();
                 break;
