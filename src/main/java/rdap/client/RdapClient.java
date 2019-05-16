@@ -1,10 +1,8 @@
 package rdap.client;
 
-import rdap.client.data.Error;
 import rdap.client.data.*;
 
 import java.io.IOException;
-import java.net.URL;
 
 /**
  * https://tools.ietf.org/html/rfc7480 HTTP Usage in the Registration Data Access Protocol
@@ -93,9 +91,4 @@ public interface RdapClient {
     //Nameservers nameservers(String query);
     //Entityies entities(String query);
 
-    /**
-     * @param url   request url
-     * @param error response error
-     */
-    void error(URL url, Error error);
 }

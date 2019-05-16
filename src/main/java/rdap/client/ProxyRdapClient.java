@@ -34,7 +34,13 @@ public abstract class ProxyRdapClient implements RdapClient {
     protected void init(ProxySelector selector, Properties properties, ErrorHandler handler) {
         this.selector = selector;
         this.properties = properties == null ? new Properties() : properties;
-        this.handler = handler;
+        this.handler = handler == null ? defaultErrorHandler() : handler;
+    }
+
+    protected ErrorHandler defaultErrorHandler() {
+        return (url, code, error) -> {
+            LOG.error("{} {} {}", url, code, error);
+        };
     }
 
     public ProxySelector getSelector() {
@@ -90,8 +96,8 @@ public abstract class ProxyRdapClient implements RdapClient {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("{} {}", url, res.getRes());
             }
-            if (res.isError()) {
-                error(url, GSON.fromJson(res.getRes(), Error.class));
+            if (res.isFail()) {
+                error(url, resCode, res.isError() ? GSON.fromJson(res.getRes(), Error.class) : res.getRes());
             }
             return res;
         } finally {
@@ -211,12 +217,10 @@ public abstract class ProxyRdapClient implements RdapClient {
         return String.join("/", pathPrefix() + "help");
     }
 
-    @Override
-    public void error(URL url, Error error) {
-        if (error != null && handler != null) {
-            handler.handle(url, error);
+    protected void error(URL url, int code, Object error) {
+        if (handler != null) {
+            handler.handle(url, code, error);
         }
-        LOG.error("{} {}", url, error);
     }
 
     protected String pathPrefix() {
@@ -256,8 +260,9 @@ public abstract class ProxyRdapClient implements RdapClient {
             return status >= 300 || status < 200;
         }
 
-        public boolean isError() {
-            return status / 100 == 4;
+        public boolean isError() { //todo
+            //return status / 100 == 4;
+            return isFail() && res != null && res.charAt(0) == '{';
         }
     }
 

@@ -31,24 +31,26 @@ public class TestRdapClient {
         // apnic
         RdapClient client = RdapProvider.create(RdapConst.SOURCE_APNIC).build();
 
-        String ip = "203.113.0.0";
+        String ip = "203.113.0.0.1";
         Network network = client.ip(ip, 19);
         LOG.info("{} {}", ip, network);
 
-        List<Entity> entities = network.getEntities();
-        for (Entity en : entities) {
-            Role r = EntityUtil.getRole(en);
-            if (r != null)
-                LOG.info("role {} {}", r.geteMail(), EntityUtil.readEmailDomain(r.geteMail()));
+        if (network != null) {
+            List<Entity> entities = network.getEntities();
+            for (Entity en : entities) {
+                Role r = EntityUtil.getRole(en);
+                if (r != null)
+                    LOG.info("role {} {}", r.geteMail(), EntityUtil.readEmailDomain(r.geteMail()));
 
-            if (EntityUtil.isAdmin(en)) {
-                LOG.info("admin-c {}", en.getHandle());
-            }
-            if (EntityUtil.isRegistrant(en)) {
-                LOG.info("mnt_by Registrant {}", en.getHandle());
-            }
-            if (EntityUtil.isAbuse(en)) {
-                LOG.info("mnt_by Abuse{}", en.getHandle());
+                if (EntityUtil.isAdmin(en)) {
+                    LOG.info("admin-c {}", en.getHandle());
+                }
+                if (EntityUtil.isRegistrant(en)) {
+                    LOG.info("mnt_by Registrant {}", en.getHandle());
+                }
+                if (EntityUtil.isAbuse(en)) {
+                    LOG.info("mnt_by Abuse{}", en.getHandle());
+                }
             }
         }
 

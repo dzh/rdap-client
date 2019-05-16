@@ -1,7 +1,5 @@
 package rdap.client;
 
-import rdap.client.data.Error;
-
 import java.net.URL;
 
 /**
@@ -10,6 +8,11 @@ import java.net.URL;
  */
 public interface ErrorHandler {
 
-    void handle(URL url, Error error);
+    /**
+     * @param url   request url
+     * @param code  response status code
+     * @param error Error object or response string
+     */
+    void handle(URL url, int code, Object error);
 
 }
