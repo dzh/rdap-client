@@ -31,7 +31,7 @@ public class TestRdapClient {
         // apnic
         RdapClient client = RdapProvider.create(RdapConst.SOURCE_APNIC).build();
 
-        String ip = "203.113.0.0.1";
+        String ip = "203.113.0.0";
         Network network = client.ip(ip, 19);
         LOG.info("{} {}", ip, network);
 

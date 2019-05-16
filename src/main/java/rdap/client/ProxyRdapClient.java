@@ -136,7 +136,7 @@ public abstract class ProxyRdapClient implements RdapClient {
         if (res.isFail()) {
             return null;
         }
-        return GSON.fromJson(res.getRes(), Network.class);
+        return res.fromJson(Network.class);
     }
 
     protected String pathIp(String ip, Integer prefix) {
@@ -154,7 +154,7 @@ public abstract class ProxyRdapClient implements RdapClient {
         if (res.isFail()) {
             return null;
         }
-        return GSON.fromJson(res.getRes(), Entity.class);
+        return res.fromJson(Entity.class);
     }
 
     protected String pathEntity(String handle) {
@@ -168,7 +168,7 @@ public abstract class ProxyRdapClient implements RdapClient {
         if (res.isFail()) {
             return null;
         }
-        return GSON.fromJson(res.getRes(), Autnum.class);
+        return res.fromJson(Autnum.class);
     }
 
     protected String pathAutnum(long asn) {
@@ -182,7 +182,7 @@ public abstract class ProxyRdapClient implements RdapClient {
         if (res.isFail()) {
             return null;
         }
-        return GSON.fromJson(res.getRes(), Domain.class);
+        return res.fromJson(Domain.class);
     }
 
     protected String pathDomain(String rDNS) {
@@ -196,7 +196,7 @@ public abstract class ProxyRdapClient implements RdapClient {
         if (res.isFail()) {
             return null;
         }
-        return GSON.fromJson(res.getRes(), Nameserver.class);
+        return res.fromJson(Nameserver.class);
     }
 
     protected String pathNameserver(String host) {
@@ -210,7 +210,7 @@ public abstract class ProxyRdapClient implements RdapClient {
         if (res.isFail()) {
             return null;
         }
-        return GSON.fromJson(res.getRes(), Help.class);
+        return res.fromJson(Help.class);
     }
 
     protected String pathHelp() {
@@ -263,6 +263,15 @@ public abstract class ProxyRdapClient implements RdapClient {
         public boolean isError() { //todo
             //return status / 100 == 4;
             return isFail() && res != null && res.charAt(0) == '{';
+        }
+
+        public <T> T fromJson(Class<T> clazz) {
+            try {
+                return GSON.fromJson(res, clazz);
+            } catch (IllegalStateException e) {
+                LOG.error("{} fromJson {}", clazz.getSimpleName(), res);
+                throw e;
+            }
         }
     }
 
