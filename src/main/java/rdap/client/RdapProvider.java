@@ -67,7 +67,7 @@ public class RdapProvider {
                 break;
             case RdapConst.SOURCE_LACNIC: {
                 if ("br".equalsIgnoreCase(cc)) {
-                    rdap = new RegistroClient();
+                    rdap = new RegistroBrClient();
                 } else {
                     rdap = new LacnicClient();
                 }

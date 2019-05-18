@@ -16,7 +16,7 @@ import java.net.URL;
  * @author dzh
  * @date 2019-03-21 11:17
  */
-public class RegistroClient extends ProxyRdapClient {
+public class RegistroBrClient extends ProxyRdapClient {
 
     @Override
     protected URL host() throws MalformedURLException {
