@@ -1,11 +1,14 @@
 package rdap.client.util;
 
+import com.google.gson.Gson;
 import ezvcard.VCard;
 import ezvcard.io.json.JCardReader;
 import ezvcard.parameter.TelephoneType;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import rdap.client.data.Entity;
+import rdap.client.whois.Role;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -63,6 +66,140 @@ public class TestEntityUtil {
         LOG.info("{}", EntityUtil.formatUTC(st));
         st = "2017-01-28T08:32:29Z";
         LOG.info("{}", EntityUtil.formatUTC(st));
+    }
+
+    @Test
+    public void getRoleTest() throws IOException {
+        String entity = "{\n" +
+                "            \"objectClassName\":\"entity\",\n" +
+                "            \"handle\":\"47686555000100\",\n" +
+                "            \"vcardArray\":[\n" +
+                "                \"vcard\",\n" +
+                "                [\n" +
+                "                    [\n" +
+                "                        \"version\",\n" +
+                "                        {\n" +
+                "\n" +
+                "                        },\n" +
+                "                        \"text\",\n" +
+                "                        \"4.0\"\n" +
+                "                    ],\n" +
+                "                    [\n" +
+                "                        \"kind\",\n" +
+                "                        {\n" +
+                "\n" +
+                "                        },\n" +
+                "                        \"text\",\n" +
+                "                        \"org\"\n" +
+                "                    ],\n" +
+                "                    [\n" +
+                "                        \"fn\",\n" +
+                "                        {\n" +
+                "\n" +
+                "                        },\n" +
+                "                        \"text\",\n" +
+                "                        \"Momentum Empreendimentos Imobiliários Ltda.\"\n" +
+                "                    ]\n" +
+                "                ]\n" +
+                "            ],\n" +
+                "            \"roles\":[\n" +
+                "                \"registrant\"\n" +
+                "            ],\n" +
+                "            \"publicIds\":[\n" +
+                "                {\n" +
+                "                    \"type\":\"cnpj\",\n" +
+                "                    \"identifier\":\"47.686.555/0001-00\"\n" +
+                "                }\n" +
+                "            ],\n" +
+                "            \"entities\":[\n" +
+                "                {\n" +
+                "                    \"objectClassName\":\"entity\",\n" +
+                "                    \"handle\":\"FAD135\",\n" +
+                "                    \"vcardArray\":[\n" +
+                "                        \"vcard\",\n" +
+                "                        [\n" +
+                "                            [\n" +
+                "                                \"version\",\n" +
+                "                                {\n" +
+                "\n" +
+                "                                },\n" +
+                "                                \"text\",\n" +
+                "                                \"4.0\"\n" +
+                "                            ],\n" +
+                "                            [\n" +
+                "                                \"kind\",\n" +
+                "                                {\n" +
+                "\n" +
+                "                                },\n" +
+                "                                \"text\",\n" +
+                "                                \"individual\"\n" +
+                "                            ],\n" +
+                "                            [\n" +
+                "                                \"fn\",\n" +
+                "                                {\n" +
+                "\n" +
+                "                                },\n" +
+                "                                \"text\",\n" +
+                "                                \"Fabio Donizetti\"\n" +
+                "                            ],\n" +
+                "                            [\n" +
+                "                                \"lang\",\n" +
+                "                                {\n" +
+                "\n" +
+                "                                },\n" +
+                "                                \"language-tag\",\n" +
+                "                                \"pt\"\n" +
+                "                            ]\n" +
+                "                        ]\n" +
+                "                    ],\n" +
+                "                    \"roles\":[\n" +
+                "                        \"administrative\"\n" +
+                "                    ],\n" +
+                "                    \"events\":[\n" +
+                "                        {\n" +
+                "                            \"eventAction\":\"registration\",\n" +
+                "                            \"eventDate\":\"2002-08-27T12:00:00Z\"\n" +
+                "                        },\n" +
+                "                        {\n" +
+                "                            \"eventAction\":\"last changed\",\n" +
+                "                            \"eventDate\":\"2009-09-22T14:01:38Z\"\n" +
+                "                        }\n" +
+                "                    ],\n" +
+                "                    \"links\":[\n" +
+                "                        {\n" +
+                "                            \"value\":\"https://rdap.registro.br/entity/FAD135\",\n" +
+                "                            \"rel\":\"self\",\n" +
+                "                            \"href\":\"https://rdap.registro.br/entity/FAD135\",\n" +
+                "                            \"type\":\"application/rdap+json\"\n" +
+                "                        }\n" +
+                "                    ]\n" +
+                "                }\n" +
+                "            ],\n" +
+                "            \"events\":[\n" +
+                "                {\n" +
+                "                    \"eventAction\":\"registration\",\n" +
+                "                    \"eventDate\":\"1998-02-03T12:00:00Z\"\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"eventAction\":\"last changed\",\n" +
+                "                    \"eventDate\":\"2007-10-16T17:01:59Z\"\n" +
+                "                }\n" +
+                "            ],\n" +
+                "            \"links\":[\n" +
+                "                {\n" +
+                "                    \"value\":\"https://rdap.registro.br/entity/47686555000100\",\n" +
+                "                    \"rel\":\"self\",\n" +
+                "                    \"href\":\"https://rdap.registro.br/entity/47686555000100\",\n" +
+                "                    \"type\":\"application/rdap+json\"\n" +
+                "                }\n" +
+                "            ],\n" +
+                "            \"legalRepresentative\":\"Fabio Donizete de Mendonça\"\n" +
+                "        }";
+        Gson gson = new Gson();
+        Entity en = gson.fromJson(entity, Entity.class);
+        Role role = EntityUtil.getRole(en);
+        LOG.info("role {}", gson.toJson(role));
+
     }
 
 }

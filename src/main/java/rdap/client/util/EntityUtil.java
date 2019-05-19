@@ -8,16 +8,18 @@ import ezvcard.property.Email;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rdap.client.ProxyRdapClient;
+import rdap.client.RdapConst;
 import rdap.client.data.Entity;
 import rdap.client.data.Event;
+import rdap.client.data.Link;
 import rdap.client.data.Remark;
 import rdap.client.whois.Role;
 
 import java.io.IOException;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.TimeZone;
 
@@ -134,16 +136,21 @@ public class EntityUtil {
      * @return
      */
     public static Role getRole(Entity en) throws IOException {
+        Role role = new Role();
+        role.setNicHdl(en.getHandle()); //handle
+        role.setLastModified(EntityUtil.getLastChanged(en)); //events
+
+        String[] remarks = compactRemarks(en.getRemarks());
+        if (remarks != null && remarks.length > 0) {
+            role.setRemarks(remarks[0]);
+        }
+
+        // vcardArray
         List<Object> vcardArray = en.getVcardArray();
         if (vcardArray == null) return null;
-
-        List<Role> roles = new LinkedList<>();
         try (JCardReader reader = new JCardReader(ProxyRdapClient.GSON.toJson(vcardArray))) {
             VCard vcard;
             while ((vcard = reader.readNext()) != null) {
-                Role role = new Role();
-                role.setNicHdl(en.getHandle());
-                role.setLastModified(EntityUtil.getLastChanged(en));
                 role.setRole(vcard.getFormattedName().getValue());//fn
 //                role.setAbuseMailbox(); todo
 
@@ -164,39 +171,42 @@ public class EntityUtil {
                         }
                     }
                 });
-
-                String[] remarks = compactRemarks(en.getRemarks());
-                if (remarks != null && remarks.length > 0) {
-                    role.setRemarks(remarks[0]);
-                }
-                //admin_c tech_c
-                List<Entity> entities = en.getEntities();
-                if (entities != null) { //todo https://rdap.apnic.net/ip/203.113.0.0
-                    for (Entity e : entities) {
-                        if (isAdmin(e)) {
-                            role.setAdminC(e.getHandle());
-                        }
-                        if (isTech(e)) {
-                            role.setTechC(e.getHandle());
-                        }
-                        if (isRegistrant(e)) {
-                            role.setMntBy(e.getHandle());
-                        }
-                        if (isAbuse(e)) {
-                            if (role.getMntBy() == null) { //todo
-                                role.setMntBy(e.getHandle());
-                            }
-                        }
-                    }
-                }
-                roles.add(role);
             }
         }
 
-        if (roles.size() > 1) {
-            LOG.error("too many roles {} {}", roles.size(), ProxyRdapClient.GSON.toJson(roles));
+        //entities admin_c tech_c
+        List<Entity> entities = en.getEntities();
+        if (entities != null) { //todo https://rdap.apnic.net/ip/203.113.0.0
+            for (Entity e : entities) {
+                if (isAdmin(e)) {
+                    role.setAdminC(e.getHandle());
+                }
+                if (isTech(e)) {
+                    role.setTechC(e.getHandle());
+                }
+                if (isRegistrant(e)) {
+                    role.setMntBy(e.getHandle());
+                }
+                if (isAbuse(e)) {
+                    if (role.getMntBy() == null) { //todo
+                        role.setMntBy(e.getHandle());
+                    }
+                }
+            }
         }
-        return roles.get(0); // An Entity to A Role
+
+        //links source
+        String url = readRdapUrl(en.getLinks());
+        if (null != url) {
+            UrlParser urlParser = UrlParser.parse(new URL(url));
+            String host = urlParser.getHost();
+            role.setSource(UrlParser.readSouceFromHost(host));
+            if (RdapConst.RDAP_REGISTRO_BR_HOST.equals(host)) {
+                role.setCountry("BR");
+            }
+        }
+
+        return role; // An Entity to A Role
     }
 
     public static String readEmailDomain(String email) {
@@ -206,6 +216,17 @@ public class EntityUtil {
         if (loc < 0) return null;
 
         return email.substring(loc + 1);
+    }
+
+    public static String readRdapUrl(List<Link> links) {
+        if (links == null) return null;
+
+        for (Link link : links) {
+            if ("application/rdap+json".equals(link.getType())) {
+                return link.getValue();
+            }
+        }
+        return null;
     }
 
 
