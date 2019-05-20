@@ -241,6 +241,7 @@ public class EntityUtil {
         String descr = "";
         for (Remark r : remarkList) {
             String title = r.getTitle();
+            if (title == null) continue;
             switch (title) {
                 case "remarks":
                     remarks += "\n" + String.join("\n", r.getDescription());
