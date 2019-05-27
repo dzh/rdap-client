@@ -85,31 +85,33 @@ public abstract class ProxyRdapClient implements RdapClient {
             LOG.info("redirect {} {}", url, newUrl);
         }
 
+        RdapRes res = null;
         try (InputStream in = (resCode / 100 == 2) ? conn.getInputStream() : conn.getErrorStream()) {
             if (in == null) {
+                res = RdapRes.create(resCode, null);
                 LOG.error("InputStream null {} {}", url, resCode);
-                RdapRes res = RdapRes.create(resCode, null);
-                return res;
-            }
+            } else {
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                byte[] buf = new byte[1024]; //TODO config
+                int len = -1;
+                while ((len = in.read(buf)) != -1) {
+                    baos.write(buf, 0, len);
+                }
 
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            byte[] buf = new byte[1024]; //TODO config
-            int len = -1;
-            while ((len = in.read(buf)) != -1) {
-                baos.write(buf, 0, len);
+                res = RdapRes.create(resCode, new String(baos.toByteArray(), RdapConst.UTF8));
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("{} {}", url, res.getRes());
+                }
             }
-            RdapRes res = RdapRes.create(resCode, new String(baos.toByteArray(), RdapConst.UTF8));
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("{} {}", url, res.getRes());
-            }
-            if (res.isFail()) {
-                error(url, resCode, res.isError() ? GSON.fromJson(res.getRes(), Error.class) : res.getRes());
-            }
-            return res;
         } finally {
             conn.disconnect();
             LOG.info("{} {} {} {} {}", url, resCode, conn.getContentLength(), conn.getResponseMessage(), System.currentTimeMillis() - st);
         }
+
+        if (res.isFail()) {
+            error(url, resCode, res.isError() ? GSON.fromJson(res.getRes(), Error.class) : res.getRes());
+        }
+        return res;
     }
 
     protected Proxy selectProxy(URL url) throws URISyntaxException {
