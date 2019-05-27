@@ -86,6 +86,12 @@ public abstract class ProxyRdapClient implements RdapClient {
         }
 
         try (InputStream in = (resCode / 100 == 2) ? conn.getInputStream() : conn.getErrorStream()) {
+            if (in == null) {
+                LOG.error("InputStream null {} {}", url, resCode);
+                RdapRes res = RdapRes.create(resCode, null);
+                return res;
+            }
+
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             byte[] buf = new byte[1024]; //TODO config
             int len = -1;
@@ -238,9 +244,13 @@ public abstract class ProxyRdapClient implements RdapClient {
             // todo
             // fix Invalid escape sequence at line 42 column 25 path $.vcardArray[1][3][3][3]
             // e.g. "Tolima\Ibagué", -> "Tolima Ibagué",
-            r.res = res == null ? res : res.replaceAll("\\\\", " ");
+            r.res = clearRes(res);
 
             return r;
+        }
+
+        private static final String clearRes(String res) {
+            return res == null ? res : res.replaceAll("\\\\", " ");
         }
 
         public int getStatus() {
@@ -256,11 +266,11 @@ public abstract class ProxyRdapClient implements RdapClient {
         }
 
         public void setRes(String res) {
-            this.res = res;
+            this.res = clearRes(res);
         }
 
         public boolean isFail() {
-            return status >= 300 || status < 200;
+            return res == null || status >= 300 || status < 200;
         }
 
         public boolean isError() { //todo
