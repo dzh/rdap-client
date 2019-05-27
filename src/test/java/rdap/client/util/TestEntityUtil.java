@@ -72,15 +72,11 @@ public class TestEntityUtil {
     public void getRoleTest() throws IOException {
         String entity = "{\n" +
                 "  \"lang\" : \"en\",\n" +
-                "  \"remarks\" : [ {\n" +
-                "    \"title\" : \"Remark\",\n" +
-                "    \"description\" : [ \"data has been transferred from RIPE Whois Database 20050221\" ]\n" +
-                "  } ],\n" +
                 "  \"notices\" : [ {\n" +
                 "    \"title\" : \"ABOUT\",\n" +
                 "    \"description\" : [ \"This is the AfriNIC RDAP server.\" ],\n" +
                 "    \"links\" : [ {\n" +
-                "      \"value\" : \"https://rdap.afrinic.net/rdap/entity/Ba1050-AFRINIC\",\n" +
+                "      \"value\" : \"https://rdap.afrinic.net/rdap/entity/BN10-AFRINIC\",\n" +
                 "      \"rel\" : \"describedby\",\n" +
                 "      \"href\" : \"http://www.afrinic.net/en/library/membership-documents/197-database-afrinic-database-reference-manual-\",\n" +
                 "      \"hreflang\" : [ \"en\" ],\n" +
@@ -89,18 +85,16 @@ public class TestEntityUtil {
                 "      \"media\" : \"screen\"\n" +
                 "    } ]\n" +
                 "  } ],\n" +
-                "  \"handle\" : \"Ba1050-AFRINIC\",\n" +
+                "  \"handle\" : \"BN10-AFRINIC\",\n" +
                 "  \"status\" : [ \"active\" ],\n" +
                 "  \"port43\" : \"whois.afrinic.net\",\n" +
-                "  \"vcardArray\" : [ \"vcard\", [ [ \"version\", { }, \"text\", \"4.0\" ], [ \"kind\", { }, \"text\", \"individual\" ], [ \"fn\", { }, \"text\", \"Benaoud a.Hafid\" ], [ \"tel\", {\n" +
+                "  \"vcardArray\" : [ \"vcard\", [ [ \"version\", { }, \"text\", \"4.0\" ], [ \"kind\", { }, \"text\", \"individual\" ], [ \"fn\", { }, \"text\", \"Badru Ntege\" ], [ \"tel\", {\n" +
                 "    \"type\" : \"work\"\n" +
-                "  }, \"uri\", \"tel:+213-36-91-00-80\" ], [ \"tel\", {\n" +
+                "  }, \"uri\", \"tel:+256-754-700088\" ], [ \"email\", {\n" +
                 "    \"type\" : \"work\"\n" +
-                "  }, \"uri\", \"tel:+213-36-91-00-80\" ], [ \"email\", {\n" +
+                "  }, \"text\", \"badru.ntege@nftconsult.com\" ], [ \"adr\", {\n" +
                 "    \"type\" : \"work\"\n" +
-                "  }, \"text\", \"h.benaoud@wissal.dz\" ], [ \"adr\", {\n" +
-                "    \"type\" : \"work\"\n" +
-                "  }, \"text\", [ \"Université ferhat Abbas- Setif 19000\", \"Setif\", \"\", \"\", \"\", \"\", \"\" ] ] ] ],\n" +
+                "  }, \"text\", [ \"Kampala 256\", \"UG\", \"\", \"\", \"\", \"\", \"\" ] ] ] ],\n" +
                 "  \"objectClassName\" : \"entity\",\n" +
                 "  \"rdapConformance\" : [ \"rdap_level_0\" ]\n" +
                 "}";

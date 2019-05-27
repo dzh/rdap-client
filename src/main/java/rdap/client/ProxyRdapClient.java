@@ -283,7 +283,7 @@ public abstract class ProxyRdapClient implements RdapClient {
         public <T> T fromJson(Class<T> clazz) {
             try {
                 return GSON.fromJson(res, clazz);
-            } catch (IllegalStateException e) {
+            } catch (Exception e) {
                 LOG.error("{} fromJson {}", clazz.getSimpleName(), res);
                 throw e;
             }
