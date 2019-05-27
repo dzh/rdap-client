@@ -71,172 +71,40 @@ public class TestEntityUtil {
     @Test
     public void getRoleTest() throws IOException {
         String entity = "{\n" +
-                "   \"objectClassName\":\"entity\",\n" +
-                "   \"handle\":\"CO-CSME1-LACNIC\",\n" +
-                "   \"legalRepresentative\":\"Sr. SAMUEL VELASCO\",\n" +
-                "   \"vcardArray\":[\n" +
-                "      \"vcard\",\n" +
-                "      [\n" +
-                "         [\n" +
-                "            \"version\",\n" +
-                "            {\n" +
-                "\n" +
-                "            },\n" +
-                "            \"text\",\n" +
-                "            \"4.0\"\n" +
-                "         ],\n" +
-                "         [\n" +
-                "            \"fn\",\n" +
-                "            {\n" +
-                "\n" +
-                "            },\n" +
-                "            \"text\",\n" +
-                "            \"CONSORCIO SISTEM MECM\"\n" +
-                "         ],\n" +
-                "         [\n" +
-                "            \"kind\",\n" +
-                "            {\n" +
-                "\n" +
-                "            },\n" +
-                "            \"text\",\n" +
-                "            \"individual\"\n" +
-                "         ],\n" +
-                "         [\n" +
-                "            \"adr\",\n" +
-                "            {\n" +
-                "\n" +
-                "            },\n" +
-                "            \"text\",\n" +
-                "            [\n" +
-                "               \"\",\n" +
-                "               \"0\",\n" +
-                "               \"KR 76 # 57 R 92 SUR 0\",\n" +
-                "               \"Bogotá D.C.\\Bogotá D.C.\",\n" +
-                "               \"1\",\n" +
-                "               \"1\",\n" +
-                "               \"CO\"\n" +
-                "            ]\n" +
-                "         ],\n" +
-                "         [\n" +
-                "            \"tel\",\n" +
-                "            {\n" +
-                "               \"type\":\"voice\"\n" +
-                "            },\n" +
-                "            \"text\",\n" +
-                "            \"57  7565688/0\"\n" +
-                "         ]\n" +
-                "      ]\n" +
-                "   ],\n" +
-                "   \"roles\":[\n" +
-                "      \"registrant\"\n" +
-                "   ],\n" +
-                "   \"networks\":[\n" +
-                "      {\n" +
-                "   \"objectClassName\":\"ip network\",\n" +
-                "   \"handle\":\"190.27.168.56/30\",\n" +
-                "   \"startAddress\":\"190.27.168.56\",\n" +
-                "   \"endAddress\":\"190.27.168.59\",\n" +
-                "   \"ipVersion\":\"v4\",\n" +
-                "   \"type\":\"re-allocated\",\n" +
-                "   \"events\":[\n" +
-                "      {\n" +
-                "         \"eventAction\":\"registration\",\n" +
-                "         \"eventDate\":\"2019-02-15T19:58:07Z\"\n" +
-                "      },\n" +
-                "      {\n" +
-                "         \"eventAction\":\"last changed\",\n" +
-                "         \"eventDate\":\"2019-02-15T19:58:07Z\"\n" +
-                "      }\n" +
-                "   ],\n" +
-                "   \"links\":[\n" +
-                "      {\n" +
-                "         \"value\":\"https://rdap.lacnic.net/rdap/ip/190.27.168.56/30\",\n" +
-                "         \"rel\":\"self\",\n" +
-                "         \"type\":\"application/rdap+json\",\n" +
-                "         \"href\":\"https://rdap.lacnic.net/rdap/ip/190.27.168.56/30\"\n" +
-                "      }\n" +
-                "   ]\n" +
-                "}\n" +
-                "   ],\n" +
-                "   \"autnums\":[\n" +
-                "      {}\n" +
-                "   ],\n" +
-                "   \"entities\":[\n" +
-                "      {\n" +
-                "   \"objectClassName\":\"entity\",\n" +
-                "   \"handle\":\"CRE\",\n" +
-                "   \"roles\":[\n" +
-                "      \"administrative\", \"registrant\"\n" +
-                "   ],\n" +
-                "   \"links\":[\n" +
-                "      {\n" +
-                "         \"value\":\"https://rdap.lacnic.net/rdap/entity/CRE\",\n" +
-                "         \"rel\":\"self\",\n" +
-                "         \"type\":\"application/rdap+json\",\n" +
-                "         \"href\":\"https://rdap.lacnic.net/rdap/entity/CRE\"\n" +
-                "      }\n" +
-                "   ]\n" +
-                "}\n" +
-                "   ],\n" +
-                "   \"events\":[\n" +
-                "      {\n" +
-                "         \"eventAction\":\"registration\",\n" +
-                "         \"eventDate\":\"2019-02-15T19:58:04Z\"\n" +
-                "      },\n" +
-                "      {\n" +
-                "         \"eventAction\":\"last changed\",\n" +
-                "         \"eventDate\":\"2019-02-15T19:58:04Z\"\n" +
-                "      }\n" +
-                "   ],\n" +
-                "   \"links\":[\n" +
-                "      {\n" +
-                "         \"value\":\"https://rdap.lacnic.net/rdap/entity/CO-CSME1-LACNIC\",\n" +
-                "         \"rel\":\"self\",\n" +
-                "         \"type\":\"application/rdap+json\",\n" +
-                "         \"href\":\"https://rdap.lacnic.net/rdap/entity/CO-CSME1-LACNIC\"\n" +
-                "      }\n" +
-                "   ],\n" +
-                "   \"rdapConformance\":[\n" +
-                "      \"rdap_level_0\"\n" +
-                "   ],\n" +
-                "   \"notices\":[\n" +
-                "      {\n" +
-                "   \"title\":\"RDAP Cache\",\n" +
-                "   \"description\":[\n" +
-                "      \"This object is stored in a temporary cache.\",\n" +
-                "      \"Rdap objects may take up to 4 hours to refresh.\"\n" +
-                "   ]\n" +
-                "},\n" +
-                "{\n" +
-                "   \"title\":\"Terms and Conditions\",\n" +
-                "   \"description\":[\n" +
-                "      \"Terms and Conditions.\"\n" +
-                "   ],\n" +
-                "   \"links\":[\n" +
-                "      {\n" +
-                "         \"value\":\"https://www.lacnic.net/rdap-terms-and-conditions\",\n" +
-                "         \"href\":\"https://www.lacnic.net/rdap-terms-and-conditions\",\n" +
-                "         \"type\":\"text/html\"\n" +
-                "      }\n" +
-                "   ]\n" +
-                "},\n" +
-                "{\n" +
-                "   \"title\":\"Privacy policy\",\n" +
-                "   \"description\":[\n" +
-                "      \"Privacy policy.\"\n" +
-                "   ],\n" +
-                "   \"links\":[\n" +
-                "      {\n" +
-                "         \"value\":\"https://www.lacnic.net/privacy-policy\",\n" +
-                "         \"href\":\"https://www.lacnic.net/privacy-policy\",\n" +
-                "         \"type\":\"text/html\"\n" +
-                "      }\n" +
-                "   ]\n" +
-                "}\n" +
-                "   ],\n" +
-                "   \"port43\":\"whois.lacnic.net\"\n" +
+                "  \"lang\" : \"en\",\n" +
+                "  \"remarks\" : [ {\n" +
+                "    \"title\" : \"Remark\",\n" +
+                "    \"description\" : [ \"data has been transferred from RIPE Whois Database 20050221\" ]\n" +
+                "  } ],\n" +
+                "  \"notices\" : [ {\n" +
+                "    \"title\" : \"ABOUT\",\n" +
+                "    \"description\" : [ \"This is the AfriNIC RDAP server.\" ],\n" +
+                "    \"links\" : [ {\n" +
+                "      \"value\" : \"https://rdap.afrinic.net/rdap/entity/Ba1050-AFRINIC\",\n" +
+                "      \"rel\" : \"describedby\",\n" +
+                "      \"href\" : \"http://www.afrinic.net/en/library/membership-documents/197-database-afrinic-database-reference-manual-\",\n" +
+                "      \"hreflang\" : [ \"en\" ],\n" +
+                "      \"type\" : \"text/html\",\n" +
+                "      \"title\" : \"AFRINIC Database Reference Manual\",\n" +
+                "      \"media\" : \"screen\"\n" +
+                "    } ]\n" +
+                "  } ],\n" +
+                "  \"handle\" : \"Ba1050-AFRINIC\",\n" +
+                "  \"status\" : [ \"active\" ],\n" +
+                "  \"port43\" : \"whois.afrinic.net\",\n" +
+                "  \"vcardArray\" : [ \"vcard\", [ [ \"version\", { }, \"text\", \"4.0\" ], [ \"kind\", { }, \"text\", \"individual\" ], [ \"fn\", { }, \"text\", \"Benaoud a.Hafid\" ], [ \"tel\", {\n" +
+                "    \"type\" : \"work\"\n" +
+                "  }, \"uri\", \"tel:+213-36-91-00-80\" ], [ \"tel\", {\n" +
+                "    \"type\" : \"work\"\n" +
+                "  }, \"uri\", \"tel:+213-36-91-00-80\" ], [ \"email\", {\n" +
+                "    \"type\" : \"work\"\n" +
+                "  }, \"text\", \"h.benaoud@wissal.dz\" ], [ \"adr\", {\n" +
+                "    \"type\" : \"work\"\n" +
+                "  }, \"text\", [ \"Université ferhat Abbas- Setif 19000\", \"Setif\", \"\", \"\", \"\", \"\", \"\" ] ] ] ],\n" +
+                "  \"objectClassName\" : \"entity\",\n" +
+                "  \"rdapConformance\" : [ \"rdap_level_0\" ]\n" +
                 "}";
-        entity = entity.replaceAll("\\\\", " ");
+        // entity = entity.replaceAll("\\\\", " ");
         Gson gson = JsonUtil.GSON;
         Entity en = gson.fromJson(entity, Entity.class);
         Role role = EntityUtil.getRole(en);

@@ -218,7 +218,18 @@ public class EntityUtil {
         }
 
         StringBuilder buf = new StringBuilder();
-        String param = adr.getStreetAddress();
+
+        String param = adr.getPoBox();
+        if (param != null && !param.isEmpty()) {
+            buf.append(param);
+            buf.append(",");
+        }
+        param = adr.getExtendedAddress();
+        if (param != null && !param.isEmpty()) {
+            buf.append(param);
+            buf.append(",");
+        }
+        param = adr.getStreetAddress();
         if (param != null && !param.isEmpty()) {
             buf.append(param);
             buf.append(",");
