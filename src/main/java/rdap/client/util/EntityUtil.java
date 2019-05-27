@@ -155,8 +155,10 @@ public class EntityUtil {
 //                role.setAbuseMailbox(); todo
 
                 List<Address> addresses = vcard.getAddresses();
-                if (addresses != null && addresses.size() > 0)
-                    role.setAddress(vcard.getAddresses().get(0).getLabel());
+                if (addresses != null && addresses.size() > 0) {
+                    Address adr = vcard.getAddresses().get(0);
+                    role.setAddress(formatAddress(adr));
+                }
 
                 List<Email> emails = vcard.getEmails();
                 if (emails != null && emails.size() > 0)
@@ -207,6 +209,41 @@ public class EntityUtil {
         }
 
         return role; // An Entity to A Role
+    }
+
+    private static String formatAddress(Address adr) {
+        String label = adr.getLabel();
+        if (null != label && !label.isEmpty()) {
+            return label;
+        }
+
+        StringBuilder buf = new StringBuilder();
+        String param = adr.getStreetAddress();
+        if (param != null && !param.isEmpty()) {
+            buf.append(param);
+            buf.append(",");
+        }
+        param = adr.getLocality();
+        if (param != null && !param.isEmpty()) {
+            buf.append(param);
+            buf.append(",");
+        }
+        param = adr.getRegion();
+        if (param != null && !param.isEmpty()) {
+            buf.append(param);
+            buf.append(",");
+        }
+        param = adr.getCountry();
+        if (param != null && !param.isEmpty()) {
+            buf.append(param);
+            buf.append(",");
+        }
+        param = adr.getPostalCode();
+        if (param != null && !param.isEmpty()) {
+            buf.append(param);
+        }
+        return buf.toString();
+//        return String.join(",", adr.getStreetAddress(), adr.getLocality(), adr.getRegion(), adr.getCountry(), adr.getPostalCode());
     }
 
     public static String readEmailDomain(String email) {

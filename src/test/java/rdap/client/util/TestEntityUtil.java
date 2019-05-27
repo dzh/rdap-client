@@ -71,130 +71,171 @@ public class TestEntityUtil {
     @Test
     public void getRoleTest() throws IOException {
         String entity = "{\n" +
-                "            \"objectClassName\":\"entity\",\n" +
-                "            \"handle\":\"47686555000100\",\n" +
-                "            \"vcardArray\":[\n" +
-                "                \"vcard\",\n" +
-                "                [\n" +
-                "                    [\n" +
-                "                        \"version\",\n" +
-                "                        {\n" +
+                "   \"objectClassName\":\"entity\",\n" +
+                "   \"handle\":\"CO-MARI105-LACNIC\",\n" +
+                "   \"legalRepresentative\":\"Colombia Telecomunicaciones S.A. E.S.P.\",\n" +
+                "   \"vcardArray\":[\n" +
+                "      \"vcard\",\n" +
+                "      [\n" +
+                "         [\n" +
+                "            \"version\",\n" +
+                "            {\n" +
                 "\n" +
-                "                        },\n" +
-                "                        \"text\",\n" +
-                "                        \"4.0\"\n" +
-                "                    ],\n" +
-                "                    [\n" +
-                "                        \"kind\",\n" +
-                "                        {\n" +
+                "            },\n" +
+                "            \"text\",\n" +
+                "            \"4.0\"\n" +
+                "         ],\n" +
+                "         [\n" +
+                "            \"fn\",\n" +
+                "            {\n" +
                 "\n" +
-                "                        },\n" +
-                "                        \"text\",\n" +
-                "                        \"org\"\n" +
-                "                    ],\n" +
-                "                    [\n" +
-                "                        \"fn\",\n" +
-                "                        {\n" +
+                "            },\n" +
+                "            \"text\",\n" +
+                "            \"MARIA.MRODRIGUEZ\"\n" +
+                "         ],\n" +
+                "         [\n" +
+                "            \"kind\",\n" +
+                "            {\n" +
                 "\n" +
-                "                        },\n" +
-                "                        \"text\",\n" +
-                "                        \"Momentum Empreendimentos Imobiliários Ltda.\"\n" +
-                "                    ]\n" +
-                "                ]\n" +
-                "            ],\n" +
-                "            \"roles\":[\n" +
-                "                \"registrant\"\n" +
-                "            ],\n" +
-                "            \"publicIds\":[\n" +
-                "                {\n" +
-                "                    \"type\":\"cnpj\",\n" +
-                "                    \"identifier\":\"47.686.555/0001-00\"\n" +
-                "                }\n" +
-                "            ],\n" +
-                "            \"entities\":[\n" +
-                "                {\n" +
-                "                    \"objectClassName\":\"entity\",\n" +
-                "                    \"handle\":\"FAD135\",\n" +
-                "                    \"vcardArray\":[\n" +
-                "                        \"vcard\",\n" +
-                "                        [\n" +
-                "                            [\n" +
-                "                                \"version\",\n" +
-                "                                {\n" +
+                "            },\n" +
+                "            \"text\",\n" +
+                "            \"individual\"\n" +
+                "         ],\n" +
+                "         [\n" +
+                "            \"adr\",\n" +
+                "            {\n" +
                 "\n" +
-                "                                },\n" +
-                "                                \"text\",\n" +
-                "                                \"4.0\"\n" +
-                "                            ],\n" +
-                "                            [\n" +
-                "                                \"kind\",\n" +
-                "                                {\n" +
-                "\n" +
-                "                                },\n" +
-                "                                \"text\",\n" +
-                "                                \"individual\"\n" +
-                "                            ],\n" +
-                "                            [\n" +
-                "                                \"fn\",\n" +
-                "                                {\n" +
-                "\n" +
-                "                                },\n" +
-                "                                \"text\",\n" +
-                "                                \"Fabio Donizetti\"\n" +
-                "                            ],\n" +
-                "                            [\n" +
-                "                                \"lang\",\n" +
-                "                                {\n" +
-                "\n" +
-                "                                },\n" +
-                "                                \"language-tag\",\n" +
-                "                                \"pt\"\n" +
-                "                            ]\n" +
-                "                        ]\n" +
-                "                    ],\n" +
-                "                    \"roles\":[\n" +
-                "                        \"administrative\"\n" +
-                "                    ],\n" +
-                "                    \"events\":[\n" +
-                "                        {\n" +
-                "                            \"eventAction\":\"registration\",\n" +
-                "                            \"eventDate\":\"2002-08-27T12:00:00Z\"\n" +
-                "                        },\n" +
-                "                        {\n" +
-                "                            \"eventAction\":\"last changed\",\n" +
-                "                            \"eventDate\":\"2009-09-22T14:01:38Z\"\n" +
-                "                        }\n" +
-                "                    ],\n" +
-                "                    \"links\":[\n" +
-                "                        {\n" +
-                "                            \"value\":\"https://rdap.registro.br/entity/FAD135\",\n" +
-                "                            \"rel\":\"self\",\n" +
-                "                            \"href\":\"https://rdap.registro.br/entity/FAD135\",\n" +
-                "                            \"type\":\"application/rdap+json\"\n" +
-                "                        }\n" +
-                "                    ]\n" +
-                "                }\n" +
-                "            ],\n" +
-                "            \"events\":[\n" +
-                "                {\n" +
-                "                    \"eventAction\":\"registration\",\n" +
-                "                    \"eventDate\":\"1998-02-03T12:00:00Z\"\n" +
-                "                },\n" +
-                "                {\n" +
-                "                    \"eventAction\":\"last changed\",\n" +
-                "                    \"eventDate\":\"2007-10-16T17:01:59Z\"\n" +
-                "                }\n" +
-                "            ],\n" +
-                "            \"links\":[\n" +
-                "                {\n" +
-                "                    \"value\":\"https://rdap.registro.br/entity/47686555000100\",\n" +
-                "                    \"rel\":\"self\",\n" +
-                "                    \"href\":\"https://rdap.registro.br/entity/47686555000100\",\n" +
-                "                    \"type\":\"application/rdap+json\"\n" +
-                "                }\n" +
-                "            ],\n" +
-                "            \"legalRepresentative\":\"Fabio Donizete de Mendonça\"\n" +
-                "        }";
+                "            },\n" +
+                "            \"text\",\n" +
+                "            [\n" +
+                "               \"\",\n" +
+                "               \"--\",\n" +
+                "               \"Transversal 60 No 114A-55 --\",\n" +
+                "               \"Bogotá D.C\",\n" +
+                "               \"CU\",\n" +
+                "               \"111121\",\n" +
+                "               \"CO\"\n" +
+                "            ]\n" +
+                "         ],\n" +
+                "         [\n" +
+                "            \"tel\",\n" +
+                "            {\n" +
+                "               \"type\":\"voice\"\n" +
+                "            },\n" +
+                "            \"text\",\n" +
+                "            \"57 1 7050000/74106\"\n" +
+                "         ]\n" +
+                "      ]\n" +
+                "   ],\n" +
+                "   \"roles\":[\n" +
+                "      \"registrant\"\n" +
+                "   ],\n" +
+                "   \"networks\":[\n" +
+                "      {\n" +
+                "   \"objectClassName\":\"ip network\",\n" +
+                "   \"handle\":\"190.252.86.168/29\",\n" +
+                "   \"startAddress\":\"190.252.86.168\",\n" +
+                "   \"endAddress\":\"190.252.86.175\",\n" +
+                "   \"ipVersion\":\"v4\",\n" +
+                "   \"type\":\"re-allocated\",\n" +
+                "   \"events\":[\n" +
+                "      {\n" +
+                "         \"eventAction\":\"registration\",\n" +
+                "         \"eventDate\":\"2013-08-27T03:20:25Z\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "         \"eventAction\":\"last changed\",\n" +
+                "         \"eventDate\":\"2013-08-27T03:20:25Z\"\n" +
+                "      }\n" +
+                "   ],\n" +
+                "   \"links\":[\n" +
+                "      {\n" +
+                "         \"value\":\"https://rdap.lacnic.net/rdap/ip/190.252.86.168/29\",\n" +
+                "         \"rel\":\"self\",\n" +
+                "         \"type\":\"application/rdap+json\",\n" +
+                "         \"href\":\"https://rdap.lacnic.net/rdap/ip/190.252.86.168/29\"\n" +
+                "      }\n" +
+                "   ]\n" +
+                "}\n" +
+                "   ],\n" +
+                "   \"autnums\":[\n" +
+                "      {}\n" +
+                "   ],\n" +
+                "   \"entities\":[\n" +
+                "      {\n" +
+                "   \"objectClassName\":\"entity\",\n" +
+                "   \"handle\":\"CTE3\",\n" +
+                "   \"roles\":[\n" +
+                "      \"administrative\", \"registrant\"\n" +
+                "   ],\n" +
+                "   \"links\":[\n" +
+                "      {\n" +
+                "         \"value\":\"https://rdap.lacnic.net/rdap/entity/CTE3\",\n" +
+                "         \"rel\":\"self\",\n" +
+                "         \"type\":\"application/rdap+json\",\n" +
+                "         \"href\":\"https://rdap.lacnic.net/rdap/entity/CTE3\"\n" +
+                "      }\n" +
+                "   ]\n" +
+                "}\n" +
+                "   ],\n" +
+                "   \"events\":[\n" +
+                "      {\n" +
+                "         \"eventAction\":\"registration\",\n" +
+                "         \"eventDate\":\"2013-08-27T03:20:23Z\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "         \"eventAction\":\"last changed\",\n" +
+                "         \"eventDate\":\"2013-08-27T03:20:23Z\"\n" +
+                "      }\n" +
+                "   ],\n" +
+                "   \"links\":[\n" +
+                "      {\n" +
+                "         \"value\":\"https://rdap.lacnic.net/rdap/entity/CO-MARI105-LACNIC\",\n" +
+                "         \"rel\":\"self\",\n" +
+                "         \"type\":\"application/rdap+json\",\n" +
+                "         \"href\":\"https://rdap.lacnic.net/rdap/entity/CO-MARI105-LACNIC\"\n" +
+                "      }\n" +
+                "   ],\n" +
+                "   \"rdapConformance\":[\n" +
+                "      \"rdap_level_0\"\n" +
+                "   ],\n" +
+                "   \"notices\":[\n" +
+                "      {\n" +
+                "   \"title\":\"RDAP Cache\",\n" +
+                "   \"description\":[\n" +
+                "      \"This object is stored in a temporary cache.\",\n" +
+                "      \"Rdap objects may take up to 4 hours to refresh.\"\n" +
+                "   ]\n" +
+                "},\n" +
+                "{\n" +
+                "   \"title\":\"Terms and Conditions\",\n" +
+                "   \"description\":[\n" +
+                "      \"Terms and Conditions.\"\n" +
+                "   ],\n" +
+                "   \"links\":[\n" +
+                "      {\n" +
+                "         \"value\":\"https://www.lacnic.net/rdap-terms-and-conditions\",\n" +
+                "         \"href\":\"https://www.lacnic.net/rdap-terms-and-conditions\",\n" +
+                "         \"type\":\"text/html\"\n" +
+                "      }\n" +
+                "   ]\n" +
+                "},\n" +
+                "{\n" +
+                "   \"title\":\"Privacy policy\",\n" +
+                "   \"description\":[\n" +
+                "      \"Privacy policy.\"\n" +
+                "   ],\n" +
+                "   \"links\":[\n" +
+                "      {\n" +
+                "         \"value\":\"https://www.lacnic.net/privacy-policy\",\n" +
+                "         \"href\":\"https://www.lacnic.net/privacy-policy\",\n" +
+                "         \"type\":\"text/html\"\n" +
+                "      }\n" +
+                "   ]\n" +
+                "}\n" +
+                "   ],\n" +
+                "   \"port43\":\"whois.lacnic.net\"\n" +
+                "}";
         Gson gson = new Gson();
         Entity en = gson.fromJson(entity, Entity.class);
         Role role = EntityUtil.getRole(en);

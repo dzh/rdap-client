@@ -16,8 +16,8 @@ public interface RdapConst extends RdapValue {
     String P_HTTP_PROXY_SELECTOR_POLICY = "http.proxy.selector.policy";
 
     Charset UTF8 = StandardCharsets.UTF_8;
-    int DEFAULT_HTTP_READ_TIMEOUT = 10 * 1000;
-    int DEFAULT_HTTP_CONN_TIMEOUT = 10 * 1000;
+    int DEFAULT_HTTP_READ_TIMEOUT = 30 * 1000;
+    int DEFAULT_HTTP_CONN_TIMEOUT = 30 * 1000;
     String PROXY_SELECTOR_POLICY_ASC = "asc";
     String PROXY_SELECTOR_POLICY_DESC = "desc";
     String PROXY_SELECTOR_POLICY_RANDOM = "random";
