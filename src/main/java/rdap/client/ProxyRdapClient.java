@@ -1,11 +1,11 @@
 package rdap.client;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rdap.client.data.Error;
 import rdap.client.data.*;
+import rdap.client.util.JsonUtil;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -29,7 +29,7 @@ public abstract class ProxyRdapClient implements RdapClient {
 
     protected ErrorHandler handler;
 
-    public static final Gson GSON = new GsonBuilder().create();
+    public static final Gson GSON = JsonUtil.GSON;
 
     protected void init(ProxySelector selector, Properties properties, ErrorHandler handler) {
         this.selector = selector;
@@ -235,7 +235,10 @@ public abstract class ProxyRdapClient implements RdapClient {
         static final RdapRes create(int status, String res) {
             RdapRes r = new RdapRes();
             r.status = status;
-            r.res = res;
+            // todo
+            // fix Invalid escape sequence at line 42 column 25 path $.vcardArray[1][3][3][3]
+            // e.g. "Tolima\Ibagué", -> "Tolima Ibagué",
+            r.res = res == null ? res : res.replaceAll("\\\\", " ");
 
             return r;
         }

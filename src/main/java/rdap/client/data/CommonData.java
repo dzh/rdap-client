@@ -1,7 +1,6 @@
 package rdap.client.data;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import rdap.client.util.JsonUtil;
 
 import java.util.List;
 
@@ -134,10 +133,8 @@ public abstract class CommonData {
         this.handle = handle;
     }
 
-    static final Gson GSON = new GsonBuilder().create();
-
     @Override
     public String toString() {
-        return GSON.toJson(this);
+        return JsonUtil.GSON.toJson(this);
     }
 }

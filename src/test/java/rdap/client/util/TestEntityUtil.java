@@ -72,8 +72,8 @@ public class TestEntityUtil {
     public void getRoleTest() throws IOException {
         String entity = "{\n" +
                 "   \"objectClassName\":\"entity\",\n" +
-                "   \"handle\":\"CO-MARI105-LACNIC\",\n" +
-                "   \"legalRepresentative\":\"Colombia Telecomunicaciones S.A. E.S.P.\",\n" +
+                "   \"handle\":\"CO-CSME1-LACNIC\",\n" +
+                "   \"legalRepresentative\":\"Sr. SAMUEL VELASCO\",\n" +
                 "   \"vcardArray\":[\n" +
                 "      \"vcard\",\n" +
                 "      [\n" +
@@ -91,7 +91,7 @@ public class TestEntityUtil {
                 "\n" +
                 "            },\n" +
                 "            \"text\",\n" +
-                "            \"MARIA.MRODRIGUEZ\"\n" +
+                "            \"CONSORCIO SISTEM MECM\"\n" +
                 "         ],\n" +
                 "         [\n" +
                 "            \"kind\",\n" +
@@ -109,11 +109,11 @@ public class TestEntityUtil {
                 "            \"text\",\n" +
                 "            [\n" +
                 "               \"\",\n" +
-                "               \"--\",\n" +
-                "               \"Transversal 60 No 114A-55 --\",\n" +
-                "               \"Bogotá D.C\",\n" +
-                "               \"CU\",\n" +
-                "               \"111121\",\n" +
+                "               \"0\",\n" +
+                "               \"KR 76 # 57 R 92 SUR 0\",\n" +
+                "               \"Bogotá D.C.\\Bogotá D.C.\",\n" +
+                "               \"1\",\n" +
+                "               \"1\",\n" +
                 "               \"CO\"\n" +
                 "            ]\n" +
                 "         ],\n" +
@@ -123,7 +123,7 @@ public class TestEntityUtil {
                 "               \"type\":\"voice\"\n" +
                 "            },\n" +
                 "            \"text\",\n" +
-                "            \"57 1 7050000/74106\"\n" +
+                "            \"57  7565688/0\"\n" +
                 "         ]\n" +
                 "      ]\n" +
                 "   ],\n" +
@@ -133,27 +133,27 @@ public class TestEntityUtil {
                 "   \"networks\":[\n" +
                 "      {\n" +
                 "   \"objectClassName\":\"ip network\",\n" +
-                "   \"handle\":\"190.252.86.168/29\",\n" +
-                "   \"startAddress\":\"190.252.86.168\",\n" +
-                "   \"endAddress\":\"190.252.86.175\",\n" +
+                "   \"handle\":\"190.27.168.56/30\",\n" +
+                "   \"startAddress\":\"190.27.168.56\",\n" +
+                "   \"endAddress\":\"190.27.168.59\",\n" +
                 "   \"ipVersion\":\"v4\",\n" +
                 "   \"type\":\"re-allocated\",\n" +
                 "   \"events\":[\n" +
                 "      {\n" +
                 "         \"eventAction\":\"registration\",\n" +
-                "         \"eventDate\":\"2013-08-27T03:20:25Z\"\n" +
+                "         \"eventDate\":\"2019-02-15T19:58:07Z\"\n" +
                 "      },\n" +
                 "      {\n" +
                 "         \"eventAction\":\"last changed\",\n" +
-                "         \"eventDate\":\"2013-08-27T03:20:25Z\"\n" +
+                "         \"eventDate\":\"2019-02-15T19:58:07Z\"\n" +
                 "      }\n" +
                 "   ],\n" +
                 "   \"links\":[\n" +
                 "      {\n" +
-                "         \"value\":\"https://rdap.lacnic.net/rdap/ip/190.252.86.168/29\",\n" +
+                "         \"value\":\"https://rdap.lacnic.net/rdap/ip/190.27.168.56/30\",\n" +
                 "         \"rel\":\"self\",\n" +
                 "         \"type\":\"application/rdap+json\",\n" +
-                "         \"href\":\"https://rdap.lacnic.net/rdap/ip/190.252.86.168/29\"\n" +
+                "         \"href\":\"https://rdap.lacnic.net/rdap/ip/190.27.168.56/30\"\n" +
                 "      }\n" +
                 "   ]\n" +
                 "}\n" +
@@ -164,16 +164,16 @@ public class TestEntityUtil {
                 "   \"entities\":[\n" +
                 "      {\n" +
                 "   \"objectClassName\":\"entity\",\n" +
-                "   \"handle\":\"CTE3\",\n" +
+                "   \"handle\":\"CRE\",\n" +
                 "   \"roles\":[\n" +
                 "      \"administrative\", \"registrant\"\n" +
                 "   ],\n" +
                 "   \"links\":[\n" +
                 "      {\n" +
-                "         \"value\":\"https://rdap.lacnic.net/rdap/entity/CTE3\",\n" +
+                "         \"value\":\"https://rdap.lacnic.net/rdap/entity/CRE\",\n" +
                 "         \"rel\":\"self\",\n" +
                 "         \"type\":\"application/rdap+json\",\n" +
-                "         \"href\":\"https://rdap.lacnic.net/rdap/entity/CTE3\"\n" +
+                "         \"href\":\"https://rdap.lacnic.net/rdap/entity/CRE\"\n" +
                 "      }\n" +
                 "   ]\n" +
                 "}\n" +
@@ -181,19 +181,19 @@ public class TestEntityUtil {
                 "   \"events\":[\n" +
                 "      {\n" +
                 "         \"eventAction\":\"registration\",\n" +
-                "         \"eventDate\":\"2013-08-27T03:20:23Z\"\n" +
+                "         \"eventDate\":\"2019-02-15T19:58:04Z\"\n" +
                 "      },\n" +
                 "      {\n" +
                 "         \"eventAction\":\"last changed\",\n" +
-                "         \"eventDate\":\"2013-08-27T03:20:23Z\"\n" +
+                "         \"eventDate\":\"2019-02-15T19:58:04Z\"\n" +
                 "      }\n" +
                 "   ],\n" +
                 "   \"links\":[\n" +
                 "      {\n" +
-                "         \"value\":\"https://rdap.lacnic.net/rdap/entity/CO-MARI105-LACNIC\",\n" +
+                "         \"value\":\"https://rdap.lacnic.net/rdap/entity/CO-CSME1-LACNIC\",\n" +
                 "         \"rel\":\"self\",\n" +
                 "         \"type\":\"application/rdap+json\",\n" +
-                "         \"href\":\"https://rdap.lacnic.net/rdap/entity/CO-MARI105-LACNIC\"\n" +
+                "         \"href\":\"https://rdap.lacnic.net/rdap/entity/CO-CSME1-LACNIC\"\n" +
                 "      }\n" +
                 "   ],\n" +
                 "   \"rdapConformance\":[\n" +
@@ -236,11 +236,15 @@ public class TestEntityUtil {
                 "   ],\n" +
                 "   \"port43\":\"whois.lacnic.net\"\n" +
                 "}";
-        Gson gson = new Gson();
+        entity = entity.replaceAll("\\\\", " ");
+        Gson gson = JsonUtil.GSON;
         Entity en = gson.fromJson(entity, Entity.class);
         Role role = EntityUtil.getRole(en);
         LOG.info("role {}", gson.toJson(role));
 
+//        Entity en = JSON.parseObject(entity, Entity.class);
+//        Role role = EntityUtil.getRole(en);
+//        LOG.info("role {}", JSON.toJSONString(role));
     }
 
 }
