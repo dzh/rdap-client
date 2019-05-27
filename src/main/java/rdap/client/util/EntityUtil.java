@@ -242,7 +242,12 @@ public class EntityUtil {
         if (param != null && !param.isEmpty()) {
             buf.append(param);
         }
-        return buf.toString();
+
+        label = buf.toString();
+        if (label.length() > 0 && label.charAt(label.length() - 1) == ',') {
+            label = label.substring(0, label.length() - 1);
+        }
+        return label;
 //        return String.join(",", adr.getStreetAddress(), adr.getLocality(), adr.getRegion(), adr.getCountry(), adr.getPostalCode());
     }
 
