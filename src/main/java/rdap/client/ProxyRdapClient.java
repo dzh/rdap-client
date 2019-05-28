@@ -97,17 +97,16 @@ public abstract class ProxyRdapClient implements RdapClient {
                 while ((len = in.read(buf)) != -1) {
                     baos.write(buf, 0, len);
                 }
-
                 res = RdapRes.create(resCode, new String(baos.toByteArray(), RdapConst.UTF8));
-                if (LOG.isDebugEnabled()) {
-                    LOG.debug("{} {}", url, res.getRes());
-                }
             }
         } finally {
             conn.disconnect();
             LOG.info("{} {} {} {} {}", url, resCode, conn.getContentLength(), conn.getResponseMessage(), System.currentTimeMillis() - st);
         }
 
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("{} {} {}", url, resCode, res.getRes());
+        }
         if (res.isFail()) {
             error(url, resCode, res.isError() ? GSON.fromJson(res.getRes(), Error.class) : res.getRes());
         }
@@ -272,7 +271,7 @@ public abstract class ProxyRdapClient implements RdapClient {
         }
 
         public boolean isFail() {
-            return res == null || status >= 300 || status < 200;
+            return status >= 300 || status < 200 || res == null;
         }
 
         public boolean isError() { //todo
