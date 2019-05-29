@@ -15,7 +15,8 @@ public class RdapProvider {
     private String cc;
     private ProxySelector selector;
     private Properties properties;
-    private ErrorHandler handler;
+    private ErrorHandler errorHandler;
+    private DataHandler dataHandler;
 
     private RdapProvider() {
     }
@@ -46,8 +47,13 @@ public class RdapProvider {
         return this;
     }
 
-    public RdapProvider handler(ErrorHandler handler) {
-        this.handler = handler;
+    public RdapProvider errorHandler(ErrorHandler handler) {
+        this.errorHandler = handler;
+        return this;
+    }
+
+    public RdapProvider dataHandler(DataHandler handler) {
+        this.dataHandler = handler;
         return this;
     }
 
@@ -81,7 +87,7 @@ public class RdapProvider {
                 throw new IllegalArgumentException("invalid source " + source);
         }
 
-        rdap.init(selector, properties, handler);
+        rdap.init(selector, properties, errorHandler, dataHandler);
 
         return rdap;
     }

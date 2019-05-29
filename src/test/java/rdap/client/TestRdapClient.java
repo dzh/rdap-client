@@ -7,6 +7,7 @@ import rdap.client.data.Autnum;
 import rdap.client.data.Entity;
 import rdap.client.data.Network;
 import rdap.client.util.EntityUtil;
+import rdap.client.util.JsonUtil;
 import rdap.client.whois.Role;
 
 import java.io.IOException;
@@ -101,7 +102,7 @@ public class TestRdapClient {
 
         long asn = 2925;
         Autnum autnum = client.autnum(asn);
-        LOG.info("{} {}", autnum.getHandle(), autnum.getCountry());
+        LOG.info("{}", JsonUtil.GSON.toJson(autnum));
     }
 
     @Test

@@ -1,11 +1,9 @@
 package rdap.client;
 
-import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rdap.client.data.Error;
 import rdap.client.data.*;
-import rdap.client.util.JsonUtil;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -27,20 +25,25 @@ public abstract class ProxyRdapClient implements RdapClient {
 
     protected Properties properties;
 
-    protected ErrorHandler handler;
+    protected ErrorHandler errorHandler;
 
-    public static final Gson GSON = JsonUtil.GSON;
+    protected DataHandler dataHandler;
 
-    protected void init(ProxySelector selector, Properties properties, ErrorHandler handler) {
+    protected void init(ProxySelector selector, Properties properties, ErrorHandler errorhandler, DataHandler dataHandler) {
         this.selector = selector;
         this.properties = properties == null ? new Properties() : properties;
-        this.handler = handler == null ? defaultErrorHandler() : handler;
+        this.errorHandler = errorhandler == null ? defaultErrorHandler() : errorhandler;
+        this.dataHandler = dataHandler == null ? defaultDataHandler() : dataHandler;
     }
 
     protected ErrorHandler defaultErrorHandler() {
         return (url, code, error) -> {
             LOG.error("{} {} {}", url, code, error);
         };
+    }
+
+    protected DataHandler defaultDataHandler() {
+        return new DataHandler.JsonDataHandler();
     }
 
     public ProxySelector getSelector() {
@@ -108,7 +111,7 @@ public abstract class ProxyRdapClient implements RdapClient {
             LOG.debug("{} {} {}", url, resCode, res.getRes());
         }
         if (res.isFail()) {
-            error(url, resCode, res.isError() ? GSON.fromJson(res.getRes(), Error.class) : res.getRes());
+            error(url, resCode, res.isError() ? dataHandler.decode(res.getRes(), Error.class) : res.getRes());
         }
         return res;
     }
@@ -143,7 +146,7 @@ public abstract class ProxyRdapClient implements RdapClient {
         if (res.isFail()) {
             return null;
         }
-        return res.fromJson(Network.class);
+        return dataHandler.decode(res.getRes(), Network.class);
     }
 
     protected String pathIp(String ip, Integer prefix) {
@@ -161,7 +164,7 @@ public abstract class ProxyRdapClient implements RdapClient {
         if (res.isFail()) {
             return null;
         }
-        return res.fromJson(Entity.class);
+        return dataHandler.decode(res.getRes(), Entity.class);
     }
 
     protected String pathEntity(String handle) {
@@ -175,7 +178,7 @@ public abstract class ProxyRdapClient implements RdapClient {
         if (res.isFail()) {
             return null;
         }
-        return res.fromJson(Autnum.class);
+        return dataHandler.decode(res.getRes(), Autnum.class);
     }
 
     protected String pathAutnum(long asn) {
@@ -189,7 +192,7 @@ public abstract class ProxyRdapClient implements RdapClient {
         if (res.isFail()) {
             return null;
         }
-        return res.fromJson(Domain.class);
+        return dataHandler.decode(res.getRes(), Domain.class);
     }
 
     protected String pathDomain(String rDNS) {
@@ -203,7 +206,7 @@ public abstract class ProxyRdapClient implements RdapClient {
         if (res.isFail()) {
             return null;
         }
-        return res.fromJson(Nameserver.class);
+        return dataHandler.decode(res.getRes(), Nameserver.class);
     }
 
     protected String pathNameserver(String host) {
@@ -217,7 +220,7 @@ public abstract class ProxyRdapClient implements RdapClient {
         if (res.isFail()) {
             return null;
         }
-        return res.fromJson(Help.class);
+        return dataHandler.decode(res.getRes(), Help.class);
     }
 
     protected String pathHelp() {
@@ -225,8 +228,8 @@ public abstract class ProxyRdapClient implements RdapClient {
     }
 
     protected void error(URL url, int code, Object error) {
-        if (handler != null) {
-            handler.handle(url, code, error);
+        if (errorHandler != null) {
+            errorHandler.handle(url, code, error);
         }
     }
 
@@ -242,16 +245,21 @@ public abstract class ProxyRdapClient implements RdapClient {
         static final RdapRes create(int status, String res) {
             RdapRes r = new RdapRes();
             r.status = status;
-            // todo
-            // fix Invalid escape sequence at line 42 column 25 path $.vcardArray[1][3][3][3]
-            // e.g. "Tolima\Ibagué", -> "Tolima Ibagué",
             r.res = clearRes(res);
 
             return r;
         }
 
+        /**
+         * // todo filter illegal character
+         * // fix Invalid escape sequence at line 42 column 25 path $.vcardArray[1][3][3][3]
+         * // e.g. "Tolima\Ibagué", -> "Tolima Ibagué",
+         *
+         * @param res
+         * @return
+         */
         private static final String clearRes(String res) {
-            return res == null ? res : res.replaceAll("\\\\", " ");
+            return res;
         }
 
         public int getStatus() {
@@ -277,15 +285,6 @@ public abstract class ProxyRdapClient implements RdapClient {
         public boolean isError() { //todo
             //return status / 100 == 4;
             return isFail() && res != null && res.charAt(0) == '{';
-        }
-
-        public <T> T fromJson(Class<T> clazz) {
-            try {
-                return GSON.fromJson(res, clazz);
-            } catch (Exception e) {
-                LOG.error("{} fromJson {}", clazz.getSimpleName(), res);
-                throw e;
-            }
         }
     }
 

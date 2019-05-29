@@ -7,7 +7,6 @@ import ezvcard.property.Address;
 import ezvcard.property.Email;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import rdap.client.ProxyRdapClient;
 import rdap.client.RdapConst;
 import rdap.client.data.Entity;
 import rdap.client.data.Event;
@@ -148,7 +147,7 @@ public class EntityUtil {
         // vcardArray
         List<Object> vcardArray = en.getVcardArray();
         if (vcardArray == null) return null;
-        try (JCardReader reader = new JCardReader(ProxyRdapClient.GSON.toJson(vcardArray))) {
+        try (JCardReader reader = new JCardReader(JsonUtil.GSON.toJson(vcardArray))) {
             VCard vcard;
             while ((vcard = reader.readNext()) != null) {
                 role.setRole(vcard.getFormattedName().getValue());//fn

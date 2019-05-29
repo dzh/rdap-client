@@ -1,7 +1,6 @@
 package rdap.client.util;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +16,7 @@ public class TestUrlParser {
 
     static Logger LOG = LoggerFactory.getLogger(TestUrlParser.class);
 
-    static final Gson GSON = new GsonBuilder().create();
+    static final Gson GSON = JsonUtil.GSON;
 
     @Test
     public void parseTest() throws MalformedURLException {
