@@ -279,7 +279,7 @@ public abstract class ProxyRdapClient implements RdapClient {
         }
 
         public boolean isFail() {
-            return status >= 300 || status < 200 || res == null;
+            return status >= 400 || res == null;
         }
 
         public boolean isError() { //todo
