@@ -15,7 +15,11 @@ public class TestNetworkUtil {
     @Test
     public void cleanAddressTest() {
         String ip = "194.206.161.47/32";
-        LOG.info("{}", NetworkUtil.cleanAddress(ip));
+        LOG.info("{} {} {}", NetworkUtil.cleanAddress(ip), NetworkUtil.getAddress(ip), NetworkUtil.getAddressPrefix(ip));
+
+        ip = "194.206.161.47";
+        LOG.info("{} {} {}", NetworkUtil.cleanAddress(ip), NetworkUtil.getAddress(ip), NetworkUtil.getAddressPrefix(ip));
+
     }
 
 }
