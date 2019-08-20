@@ -14,7 +14,7 @@ package rdap.client.whois;
  * fax-no:         +12 34 567890 010
  * e-mail:         abc@examplenet.com
  * nic-hdl:        ABC123-AP
- * notify:          abc@examplenet.com
+ * notify:         abc@examplenet.com
  * mnt-by:         MAINT-EXAMPLENET-AP
  * last-modified:  2018-08-30T07:50:19Z
  * source:         APNIC

@@ -2,6 +2,7 @@ package rdap.client.util;
 
 import ezvcard.VCard;
 import ezvcard.io.json.JCardReader;
+import ezvcard.parameter.EmailType;
 import ezvcard.parameter.TelephoneType;
 import ezvcard.property.Address;
 import ezvcard.property.Email;
@@ -151,7 +152,6 @@ public class EntityUtil {
             VCard vcard;
             while ((vcard = reader.readNext()) != null) {
                 role.setRole(vcard.getFormattedName().getValue());//fn
-//                role.setAbuseMailbox(); todo
 
                 List<Address> addresses = vcard.getAddresses();
                 if (addresses != null && addresses.size() > 0) {
@@ -160,8 +160,23 @@ public class EntityUtil {
                 }
 
                 List<Email> emails = vcard.getEmails();
-                if (emails != null && emails.size() > 0)
-                    role.seteMail(emails.get(0).getValue());
+                if (emails != null && emails.size() > 0) {
+                    for (Email email : emails) {
+                        for (EmailType type : email.getTypes()) {
+                            if ("email".equals(type.getValue()) || EmailType.WORK.equals(type)) {
+                                role.seteMail(email.getValue());
+                            } else if ("abuse".equals(type.getValue())) {
+                                role.setAbuseMailbox(type.getValue());
+                            }
+                        }
+                    }
+                    if (role.geteMail() == null) {
+                        role.seteMail(emails.get(0).getValue());
+                    }
+                    if (role.getAbuseMailbox() == null) {
+                        role.setAbuseMailbox(role.geteMail());
+                    }
+                }
 
                 vcard.getTelephoneNumbers().forEach(tel -> {
                     for (TelephoneType type : tel.getTypes()) {
